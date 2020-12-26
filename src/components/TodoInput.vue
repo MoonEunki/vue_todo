@@ -17,18 +17,12 @@ export default {
   },
   methods:{
     addTodo(){
-      //로컬 스토리지에 k/v 로 저장하기
-
       if(this.newTodoItem!==''){
-      let obj={
-        completed:false,
-        item:this.newTodoItem
+        // this.$emit('이벤트이름',인자)
+        this.$emit('addTodoItem',this.newTodoItem)
+        this.clearInput()
       }
-      localStorage.setItem(this.newTodoItem,JSON.stringify(obj))
-      this.clearInput()
-      }
-
-      },
+    },
 
     clearInput(){
       this.newTodoItem=''

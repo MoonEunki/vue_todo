@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <todo-header/>
-    <todo-input/>
+    <todo-input v-on:addTodoItem='addOneItem'/>
 
     <!-- 이제 app에서 하위컴포넌트로 데이터넘겨줌
     propsdata에 todoItems를 담아서 넘김-->
@@ -19,7 +19,7 @@ import TodoList from './components/TodoList.vue'
 export default {
 
   //하위컴포넌트에있던것을 app으로 옮김
-    data() {
+  data() {
     return {
       todoItems: [],
     };
@@ -31,6 +31,15 @@ export default {
           this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
         }
       }
+    }
+  },
+
+  //하위컴포넌트에있던 추가하기 기능을 이벤트를 통해 받아서 여기서 추가하게 변경 
+  methods:{
+    addOneItem(newTodoItem){ 
+      let obj={ completed:false, item:newTodoItem}
+      localStorage.setItem(newTodoItem,JSON.stringify(obj))
+      this.todoItems.push(obj) //바로 list에 반영
     }
   },
 
@@ -48,7 +57,7 @@ export default {
 body{
   text-align: center;
   background-color: #f6f6f6;
-}
+} 
 input{
   border-style:groove;
   width:200px;
