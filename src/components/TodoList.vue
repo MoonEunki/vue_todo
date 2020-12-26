@@ -22,10 +22,10 @@ export default {
   props:['propsdata'],
 
   methods: {
+
+    //삭제 이벤트 보내기 
     removeTodo(todoItem,index) {
-      console.log(todoItem,index);
-      localStorage.removeItem(todoItem.item)
-      this.propsdata.splice(index,1) //해당 index를 지우게됨 
+      this.$emit('removeTodo',todoItem,index)
     },
 
     //로컬스토리지는 update가 없어서, 제거+생성 

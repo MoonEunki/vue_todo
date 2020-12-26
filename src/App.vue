@@ -5,7 +5,7 @@
 
     <!-- 이제 app에서 하위컴포넌트로 데이터넘겨줌
     propsdata에 todoItems를 담아서 넘김-->
-    <todo-list v-bind:propsdata='todoItems'/>
+    <todo-list v-bind:propsdata='todoItems' v-on:removeTodo='removeOneItem'/>
     <todo-footer/>
   </div>
 </template>
@@ -34,12 +34,18 @@ export default {
     }
   },
 
-  //하위컴포넌트에있던 추가하기 기능을 이벤트를 통해 받아서 여기서 추가하게 변경 
+  // 추가하기 기능을 이벤트를 통해 받아서 여기서 추가하게 변경 
   methods:{
     addOneItem(newTodoItem){ 
       let obj={ completed:false, item:newTodoItem}
       localStorage.setItem(newTodoItem,JSON.stringify(obj))
       this.todoItems.push(obj) //바로 list에 반영
+    },
+
+  // 삭제하기 기능을 이벤트를 통해 받아서 여기서 삭제하게 변경 
+    removeOneItem(todoItem,index){
+      localStorage.removeItem(todoItem.item)
+      this.todoItems.splice(index,1) //해당 index를 지우게됨 
     }
   },
 
