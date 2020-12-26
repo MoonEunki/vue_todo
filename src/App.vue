@@ -2,7 +2,10 @@
   <div id="app">
     <todo-header/>
     <todo-input/>
-    <todo-list/>
+
+    <!-- 이제 app에서 하위컴포넌트로 데이터넘겨줌
+    propsdata에 todoItems를 담아서 넘김-->
+    <todo-list v-bind:propsdata='todoItems'/>
     <todo-footer/>
   </div>
 </template>
@@ -14,6 +17,23 @@ import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
 
 export default {
+
+  //하위컴포넌트에있던것을 app으로 옮김
+    data() {
+    return {
+      todoItems: [],
+    };
+  },
+  created() {
+    if (localStorage.length > 0) {
+      for (let i = 0; i < localStorage.length; i++) {
+        if(localStorage.key(i)!=='loglevel:webpack-dev-server'){
+          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
+        }
+      }
+    }
+  },
+
   name: 'App',
   components: {
     TodoHeader,
