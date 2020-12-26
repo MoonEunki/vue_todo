@@ -1,10 +1,15 @@
 <template>
   <div>
     <ul>
-      <li v-for='(todoItem,index) in todoItems' v-bind:key='todoItem' class="shadow">
-        {{todoItem}}
+      <li v-for='(todoItem,index) in todoItems' v-bind:key='todoItem.item' class="shadow">
+        <font-awesome-icon class="checkBtn" icon="check" 
+        v-on:click='toggleComplete(todoItem,index)'
+        v-bind:class='{checkBtnCompleted:todoItem.completed}'/>
+        <span v-bind:class="{textCompleted:todoItem.completed}">
+        {{todoItem.item}}
+        </span>
       <span class="removeBtn" v-on:click='removeTodo(todoItem,index)' >
-            <font-awesome-icon icon="trash-alt"/>
+        <font-awesome-icon icon="trash-alt"/>
       </span>
       </li>
     </ul>
@@ -21,16 +26,24 @@ export default {
   methods: {
     removeTodo(todoItem,index) {
       console.log(todoItem,index);
-      localStorage.removeItem(todoItem)
+      localStorage.removeItem(todoItem.item)
       this.todoItems.splice(index,1) //해당 index를 지우게됨 
     },
+
+    //로컬스토리지는 update가 없어서, 제거+생성 
+    toggleComplete(todoItem){
+      todoItem.completed = !todoItem.completed 
+      localStorage.removeItem(todoItem.item)
+      localStorage.setItem(todoItem.item,JSON.stringify(todoItem))
+    }
   },
   //생성되는시점에 실행되는 라이프사이클
   created() {
     if (localStorage.length > 0) {
       for (let i = 0; i < localStorage.length; i++) {
-        let key = localStorage.key(i);
-        this.todoItems.push(key);
+        if(localStorage.key(i)!=='loglevel:webpack-dev-server'){
+          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
+        }
       }
     }
   },

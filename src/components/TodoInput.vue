@@ -2,11 +2,9 @@
 <div class="inputBox shadow">
   <!--  v-on:keyup.enter='addTodo' 는 input에서 엔터쳤을때 실행 -->
   <input v-model="newTodoItem" placeholder="edit me" v-on:keyup.enter='addTodo' >
-
   <span class="addContainer">
     <font-awesome-icon icon="plus" v-on:click='addTodo'/>
   </span>
-
 </div>
 </template>
 
@@ -20,8 +18,16 @@ export default {
   methods:{
     addTodo(){
       //로컬 스토리지에 k/v 로 저장하기
-      localStorage.setItem(this.newTodoItem,this.newTodoItem)
+
+      if(this.newTodoItem!==''){
+      let obj={
+        completed:false,
+        item:this.newTodoItem
+      }
+      localStorage.setItem(this.newTodoItem,JSON.stringify(obj))
       this.clearInput()
+      }
+
       },
 
     clearInput(){
