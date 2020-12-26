@@ -2,10 +2,10 @@
   <div id="app">
     <todo-header/>
     <todo-input v-on:addTodoItem='addOneItem'/>
-
-    <!-- 이제 app에서 하위컴포넌트로 데이터넘겨줌
-    propsdata에 todoItems를 담아서 넘김-->
-    <todo-list v-bind:propsdata='todoItems' v-on:removeTodo='removeOneItem'/>
+    <todo-list v-bind:propsdata='todoItems' 
+    v-on:removeTodo='removeOneItem'
+    v-on:toggleItem='toggleOneItme'
+    />
     <todo-footer/>
   </div>
 </template>
@@ -46,7 +46,16 @@ export default {
     removeOneItem(todoItem,index){
       localStorage.removeItem(todoItem.item)
       this.todoItems.splice(index,1) //해당 index를 지우게됨 
+    },
+
+    toggleOneItme(todoItem,index){
+      // todoItem.completed = !todoItem.completed 
+      this.todoItems[index].completed =!this.todoItems[index].completed //안티패턴
+      localStorage.removeItem(todoItem.item)
+      localStorage.setItem(todoItem.item,JSON.stringify(todoItem))
+
     }
+
   },
 
   name: 'App',

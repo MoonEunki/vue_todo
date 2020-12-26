@@ -29,10 +29,8 @@ export default {
     },
 
     //로컬스토리지는 update가 없어서, 제거+생성 
-    toggleComplete(todoItem){
-      todoItem.completed = !todoItem.completed 
-      localStorage.removeItem(todoItem.item)
-      localStorage.setItem(todoItem.item,JSON.stringify(todoItem))
+    toggleComplete(todoItem,index){
+      this.$emit('toggleItem',todoItem,index)
     }
   },
 
