@@ -4,13 +4,15 @@
     </div>
 </template>
 
-<script>
-export default {
+<script>  
+  export default {
+
   methods:{
     clearTodo(){
       this.$emit('clearAll') //인자는 필요없고 이벤트만 보냄 
     }
-  }
+  },
+
 }
 </script>
 

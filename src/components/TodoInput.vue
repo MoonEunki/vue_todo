@@ -5,28 +5,50 @@
   <span class="addContainer">
     <font-awesome-icon icon="plus" v-on:click='addTodo'/>
   </span>
+
+
+  <button id="show-modal" @click="showModal = true">Show Modal</button>
+  <!-- use the modal component, pass in the prop -->
+  <modal v-if="showModal" @close="showModal = false">
+    <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+    <h3 slot="header">경고 !</h3>
+  </modal>
+
+
 </div>
 </template>
 
 <script>
+
+import Modal from './common/Modal.vue'
+
 export default {
   data(){
     return {
-      newTodoItem:''
+      newTodoItem:'',
+      showModal: false
+
     }
   },
   methods:{
     addTodo(){
       if(this.newTodoItem!==''){
-        // this.$emit('이벤트이름',인자)
         this.$emit('addTodoItem',this.newTodoItem)
         this.clearInput()
+      }else{
+        this.showModal = ! this.showModal
       }
     },
 
     clearInput(){
       this.newTodoItem=''
     }
+  },
+  components:{  
+    Modal
   }
 
 }
