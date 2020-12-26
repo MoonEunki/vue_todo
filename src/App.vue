@@ -6,7 +6,7 @@
     v-on:removeTodo='removeOneItem'
     v-on:toggleItem='toggleOneItme'
     />
-    <todo-footer/>
+    <todo-footer v-on:clearAll='clearAllItems' />
   </div>
 </template>
 
@@ -53,7 +53,11 @@ export default {
       this.todoItems[index].completed =!this.todoItems[index].completed //안티패턴
       localStorage.removeItem(todoItem.item)
       localStorage.setItem(todoItem.item,JSON.stringify(todoItem))
+    },
 
+    clearAllItems(){
+      localStorage.clear() //이벤트받아서 전부삭제
+      this.todoItems=[]; //배열 초기화해서 새로고침효과 
     }
 
   },

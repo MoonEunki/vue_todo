@@ -6,13 +6,11 @@
 
 <script>
 export default {
-
   methods:{
     clearTodo(){
-      localStorage.clear()
+      this.$emit('clearAll') //인자는 필요없고 이벤트만 보냄 
     }
   }
-
 }
 </script>
 
