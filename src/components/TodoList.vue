@@ -2,15 +2,19 @@
   <div>
     <ul>
       <li v-for='(todoItem,index) in propsdata' v-bind:key='todoItem.item' class="shadow">
+        
         <font-awesome-icon class="checkBtn" icon="check" 
         v-on:click='toggleComplete(todoItem,index)'
         v-bind:class='{checkBtnCompleted:todoItem.completed}'/>
+        
         <span v-bind:class="{textCompleted:todoItem.completed}">
         {{todoItem.item}}
         </span>
-      <span class="removeBtn" v-on:click='removeTodo(todoItem,index)' >
-        <font-awesome-icon icon="trash-alt"/>
-      </span>
+      
+        <span class="removeBtn" v-on:click='removeTodo(todoItem,index)' >
+          <font-awesome-icon icon="trash-alt"/>
+        </span>
+
       </li>
     </ul>
   </div>
@@ -51,15 +55,22 @@ li{
   height: 50px;
   line-height: 50px;
   margin: 0.5rem 0;
-  padding: 0 0 0.9rem;
   background: white;
   border-radius: 5px;
+  align-items: center;
 }
 
+.removeBtn{
+  margin-left: auto;
+  color: #de4343;
+  padding:1rem;
+
+}
 .checkBtn{
-  line-height: 45px;
+  line-height: 50px;
   color: #62acde;
   margin-right: 5px;
+  padding:1rem;
 }
 
 .checkBtnCompleted{
@@ -71,9 +82,5 @@ li{
   color: #b3adad;
 }
 
-.removeBtn{
-  margin-left: auto;
-  color: #de4343;
-}
 
 </style>

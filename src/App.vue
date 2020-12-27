@@ -37,7 +37,7 @@ export default {
   // 추가하기 기능을 이벤트를 통해 받아서 여기서 추가하게 변경 
   methods:{
     addOneItem(newTodoItem){ 
-      let obj={ completed:false, item:newTodoItem}
+      const obj={ completed:false, item:newTodoItem}
       localStorage.setItem(newTodoItem,JSON.stringify(obj))
       this.todoItems.push(obj) //바로 list에 반영
     },
@@ -76,6 +76,8 @@ export default {
 body{
   text-align: center;
   background-color: #f6f6f6;
+  width: 90%;
+  min-width: 300px;
 } 
 input{
   border-style:groove;

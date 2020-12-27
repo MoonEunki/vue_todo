@@ -8,23 +8,15 @@
           <div class="modal-header">
             <slot name="header">
               default header
-            </slot>
+             <!-- <button class="modal-default-button" @click="$emit('close')"></button> -->
+             <!-- <font-awesome-icon icon="times" v-on:click='addTodo'/> -->
+            </slot>              
           </div>
 
 <!-- 모달 바디 -->
           <div class="modal-body">
             <slot name="body">
-              default body
-            </slot>
-          </div>
-
-<!-- 모달 푸터 -->
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
+              값을 입력해주세요 
             </slot>
           </div>
         </div>
