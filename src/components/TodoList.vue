@@ -24,14 +24,12 @@
 export default {
   methods: {
 
-    //삭제 이벤트 보내기 
     removeTodo(todoItem,index) {
-      this.$emit('removeTodo',todoItem,index)
+      this.$store.commit('removeOneItem',{todoItem,index})
     },
 
-    //로컬스토리지는 update가 없어서, 제거+생성 
     toggleComplete(todoItem,index){
-      this.$emit('toggleItem',todoItem,index)
+      this.$store.commit('toggleOneItem',{todoItem,index})
     }
   },
 

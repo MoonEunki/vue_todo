@@ -10,7 +10,6 @@ export default {
 }
 </script>
 
-// 컴포넌트 안에서만 쓰는 스타일 -> scoped
 <style scoped>
 h1 {
   color: #2F3B52;

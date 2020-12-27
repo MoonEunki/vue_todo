@@ -1,19 +1,12 @@
 <template>
 <div class="inputBox shadow">
-  <!--  v-on:keyup.enter='addTodo' 는 input에서 엔터쳤을때 실행 -->
+
   <input v-model="newTodoItem" v-on:keyup.enter='addTodo' >
   <span class="addContainer">
     <font-awesome-icon icon="plus" v-on:click='addTodo'/>
   </span>
 
-
-  <!-- <button id="show-modal" @click="showModal = true">Show Modal</button> -->
-  <!-- use the modal component, pass in the prop -->
   <modal v-if="showModal" @close="showModal = false">
-    <!--
-      you can use custom content here to overwrite
-      default content
-    -->
     <h3 slot="header">경고 !
     <font-awesome-icon class="closeModalBtn" icon="times" v-on:click='showModal=false'/>
     </h3>
@@ -39,10 +32,9 @@ export default {
     addTodo(){
       if(this.newTodoItem!==''){
         this.$store.commit('addOneItem',this.newTodoItem)
-        // this.$emit('addTodoItem',this.newTodoItem)
         this.clearInput()
       }else{
-        this.showModal = ! this.showModal //빈칸이면 modal 띄우기 
+        this.showModal = ! this.showModal 
       }
     },
 

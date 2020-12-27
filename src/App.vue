@@ -2,11 +2,8 @@
   <div id="app">
     <todo-header/>
     <todo-input/>
-    <todo-list v-bind:propsdata='todoItems' 
-    v-on:removeTodo='removeOneItem'
-    v-on:toggleItem='toggleOneItme'
-    />
-    <todo-footer v-on:clearAll='clearAllItems' />
+    <todo-list/>
+    <todo-footer/>
   </div>
 </template>
 
@@ -17,32 +14,6 @@ import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
 
 export default {
-
-  //하위컴포넌트에있던것을 app으로 옮김
-  data() {
-    return {
-      todoItems: [],
-    };
-  },
-
-  methods:{
-    removeOneItem(todoItem,index){
-      localStorage.removeItem(todoItem.item)
-      this.todoItems.splice(index,1) //해당 index를 지우게됨 
-    },
-
-    toggleOneItme(todoItem,index){
-      this.todoItems[index].completed =!this.todoItems[index].completed //안티패턴
-      localStorage.removeItem(todoItem.item)
-      localStorage.setItem(todoItem.item,JSON.stringify(todoItem))
-    },
-
-    clearAllItems(){
-      localStorage.clear() //이벤트받아서 전부삭제
-      this.todoItems=[]; //배열 초기화해서 새로고침효과 
-    }
-
-  },
 
   name: 'App',
   components: {

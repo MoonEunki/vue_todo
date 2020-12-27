@@ -22,13 +22,29 @@ export const store = new Vuex.Store({
   state: {
     todoItems: storage.fetch(),
   },
+
   mutations: {
     addOneItem(state, newTodoItem) {
-      console.log('받음');
       const obj = { completed: false, item: newTodoItem };
       localStorage.setItem(newTodoItem, JSON.stringify(obj));
       state.todoItems.push(obj);
-      // this.todoItems.push(obj); //바로 list에 반영
+    },
+
+    clearAll(state) {
+      localStorage.clear();
+      state.todoItems = [];
+    },
+
+    removeOneItem(state, payload) {
+      localStorage.removeItem(payload.todoItem.item);
+      state.todoItems.splice(payload.index, 1); //해당 index를 지우게됨
+    },
+
+    toggleOneItem(state, payload) {
+      state.todoItems[payload.index].completed = !state.todoItems[payload.index]
+        .completed;
+      localStorage.removeItem(payload.todoItem.item);
+      localStorage.setItem(payload.todoItem.item, JSON.stringify(payload));
     },
   },
 });
