@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <todo-header/>
-    <todo-input v-on:addTodoItem='addOneItem'/>
+    <todo-input/>
     <todo-list v-bind:propsdata='todoItems' 
     v-on:removeTodo='removeOneItem'
     v-on:toggleItem='toggleOneItme'
@@ -24,32 +24,14 @@ export default {
       todoItems: [],
     };
   },
-  created() {
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i++) {
-        if(localStorage.key(i)!=='loglevel:webpack-dev-server'){
-          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
-        }
-      }
-    }
-  },
 
-  // 추가하기 기능을 이벤트를 통해 받아서 여기서 추가하게 변경 
   methods:{
-    addOneItem(newTodoItem){ 
-      const obj={ completed:false, item:newTodoItem}
-      localStorage.setItem(newTodoItem,JSON.stringify(obj))
-      this.todoItems.push(obj) //바로 list에 반영
-    },
-
-  // 삭제하기 기능을 이벤트를 통해 받아서 여기서 삭제하게 변경 
     removeOneItem(todoItem,index){
       localStorage.removeItem(todoItem.item)
       this.todoItems.splice(index,1) //해당 index를 지우게됨 
     },
 
     toggleOneItme(todoItem,index){
-      // todoItem.completed = !todoItem.completed 
       this.todoItems[index].completed =!this.todoItems[index].completed //안티패턴
       localStorage.removeItem(todoItem.item)
       localStorage.setItem(todoItem.item,JSON.stringify(todoItem))

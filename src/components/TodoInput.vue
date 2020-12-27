@@ -38,7 +38,8 @@ export default {
   methods:{
     addTodo(){
       if(this.newTodoItem!==''){
-        this.$emit('addTodoItem',this.newTodoItem)
+        this.$store.commit('addOneItem',this.newTodoItem)
+        // this.$emit('addTodoItem',this.newTodoItem)
         this.clearInput()
       }else{
         this.showModal = ! this.showModal //빈칸이면 modal 띄우기 

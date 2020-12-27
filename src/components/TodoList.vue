@@ -22,9 +22,6 @@
 
 <script>
 export default {
-
-  props:['propsdata'],
-
   methods: {
 
     //삭제 이벤트 보내기 
