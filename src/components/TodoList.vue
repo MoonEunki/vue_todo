@@ -1,17 +1,17 @@
 <template>
   <div>
     <ul>
-      <li v-for='(todoItem,index) in this.todoItems' v-bind:key='todoItem.item' class="shadow">
+      <li v-for='(todoItem,index) in this.storedTodoItems' v-bind:key='todoItem.item' class="shadow">
         
         <font-awesome-icon class="checkBtn" icon="check" 
-        v-on:click='toggleComplete(todoItem,index)'
+        v-on:click='toggleComplete({todoItem,index})'
         v-bind:class='{checkBtnCompleted:todoItem.completed}'/>
         
         <span v-bind:class="{textCompleted:todoItem.completed}">
         {{todoItem.item}}
         </span>
       
-        <span class="removeBtn" v-on:click='removeTodo(todoItem,index)' >
+        <span class="removeBtn" v-on:click='removeTodo({todoItem,index})' >
           <font-awesome-icon icon="trash-alt"/>
         </span>
 
@@ -21,22 +21,29 @@
 </template>
 
 <script>
+import {mapGetters,mapMutations} from 'vuex'
+
 export default {
   methods: {
+    ...mapMutations({
+      removeTodo:'removeOneItem', //{todoItem,index} 안해도됨,
+      toggleComplete:'toggleOneItem' 
+    }),
 
-    removeTodo(todoItem,index) {
-      this.$store.commit('removeOneItem',{todoItem,index})
-    },
+    // removeTodo(todoItem,index) {
+    //   this.$store.commit('removeOneItem',{todoItem,index})
+    // },
 
-    toggleComplete(todoItem,index){
-      this.$store.commit('toggleOneItem',{todoItem,index})
-    }
+    // toggleComplete(todoItem,index){
+    //   this.$store.commit('toggleOneItem',{todoItem,index})
+    // }
   },
 
   computed:{
-    todoItems(){
-      return this.$store.getters.storedTodoItems;
-    }
+    ...mapGetters(['storedTodoItems'])
+    // todoItems(){
+    //   return this.$store.getters.storedTodoItems;
+    // }
   }
 
 };
