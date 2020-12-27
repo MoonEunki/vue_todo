@@ -29,21 +29,10 @@ export default {
       removeTodo:'removeOneItem', //{todoItem,index} 안해도됨,
       toggleComplete:'toggleOneItem' 
     }),
-
-    // removeTodo(todoItem,index) {
-    //   this.$store.commit('removeOneItem',{todoItem,index})
-    // },
-
-    // toggleComplete(todoItem,index){
-    //   this.$store.commit('toggleOneItem',{todoItem,index})
-    // }
   },
 
   computed:{
     ...mapGetters(['storedTodoItems'])
-    // todoItems(){
-    //   return this.$store.getters.storedTodoItems;
-    // }
   }
 
 };

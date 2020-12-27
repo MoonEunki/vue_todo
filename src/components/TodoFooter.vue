@@ -13,9 +13,6 @@ import {mapMutations} from 'vuex'
     ...mapMutations({
       clearTodo:'clearAll'
     })
-    // clearTodo(){
-    //   this.$store.commit('clearAll')      
-    // }
   },
 
 }
