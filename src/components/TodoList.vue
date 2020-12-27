@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for='(todoItem,index) in propsdata' v-bind:key='todoItem.item' class="shadow">
+      <li v-for='(todoItem,index) in this.$store.state.todoItems' v-bind:key='todoItem.item' class="shadow">
         
         <font-awesome-icon class="checkBtn" icon="check" 
         v-on:click='toggleComplete(todoItem,index)'

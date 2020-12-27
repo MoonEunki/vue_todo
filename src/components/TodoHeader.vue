@@ -1,6 +1,6 @@
 <template>
 <header>
-  <h1>Todo it!</h1>
+  <h1>ToDo It !</h1>
 </header>
 </template>
 
